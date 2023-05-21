@@ -1,0 +1,1 @@
+Ctrl+j = mostrar/ocultar terminal
