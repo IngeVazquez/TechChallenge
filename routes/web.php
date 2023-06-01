@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\ChallengersHasChallengeController;
 use App\Models\Challenge;
+use App\Models\ChallengersHasChallenge;
 use Illuminate\Support\Facades\Route;
 
 //example-app.test
@@ -44,13 +45,14 @@ Route::view('/login-guest','auth.login-guest')->name('login-guest');
 
 
 // Rutas sobre los registros
-Route::view('/registros','registers.index')->name('registros');
+//Route::view('/registros','registers.index')->name('registros');
 
 //Auth::routes();
 
 // Rutas para crear nuevos registros
 
-Route::get('new-register/{challenge}', [ChallengersHasChallengeController::class, 'create'])->name('new.register');
+Route::post('new-register/{challenge}', [ChallengersHasChallengeController::class, 'store'])->name('new.register');
+Route::get('/registros', [ChallengersHasChallengeController::class, 'index'])->name('registros');
 
 //Route::resource('register', ChallengersHasChallengeController::class, ['parameters' => ['challenges'=>'challenge'] ]);
 
@@ -86,32 +88,17 @@ Route::get('/reset-password/{token}', function ($token) {
 Route::post('sign-out', [SessionsController::class, 'destroy'])->middleware('auth')->name('logout');
 Route::get('profile', [ProfileController::class, 'create'])->middleware('auth')->name('profile');
 Route::post('user-profile', [ProfileController::class, 'update'])->middleware('auth');
+
+
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('billing', function () {
-		return view('pages.billing');
-	})->name('billing');
-	Route::get('tables', function () {
-		return view('pages.tables');
-	})->name('tables');
-	Route::get('rtl', function () {
-		return view('pages.rtl');
-	})->name('rtl');
-	Route::get('virtual-reality', function () {
-		return view('pages.virtual-reality');
-	})->name('virtual-reality');
-	Route::get('notifications', function () {
-		return view('pages.notifications');
-	})->name('notifications');
-	Route::get('static-sign-in', function () {
-		return view('pages.static-sign-in');
-	})->name('static-sign-in');
-	Route::get('static-sign-up', function () {
-		return view('pages.static-sign-up');
-	})->name('static-sign-up');
-	Route::get('user-management', function () {
-		return view('pages.laravel-examples.user-management');
-	})->name('user-management');
-	Route::get('user-profile', function () {
-		return view('pages.laravel-examples.user-profile');
-	})->name('user-profile');
+
+    Route::get('billing', function () { return view('pages.billing'); })->name('billing');
+	Route::get('tables', function () { return view('pages.tables'); })->name('tables');
+	Route::get('rtl', function () { return view('pages.rtl'); })->name('rtl');
+	Route::get('virtual-reality', function () { return view('pages.virtual-reality'); })->name('virtual-reality');
+	Route::get('notifications', function () { return view('pages.notifications'); })->name('notifications');
+	Route::get('static-sign-in', function () { return view('pages.static-sign-in'); })->name('static-sign-in');
+	Route::get('static-sign-up', function () { return view('pages.static-sign-up'); })->name('static-sign-up');
+	Route::get('user-management', function () { return view('pages.laravel-examples.user-management'); })->name('user-management');
+	Route::get('user-profile', function () { return view('pages.laravel-examples.user-profile'); })->name('user-profile');
 });

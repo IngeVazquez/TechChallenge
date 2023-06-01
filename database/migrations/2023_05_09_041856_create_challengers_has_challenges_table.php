@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('challengers_has_challenges', function (Blueprint $table) {
-            $table->id("register_id");
+            $table->id("id");
             $table->unsignedBigInteger("user_id")->nullable();
             $table->unsignedBigInteger("challenge_id")->nullable();
 

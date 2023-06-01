@@ -16,19 +16,40 @@
 
     <main class="mb-12 grid w-full gap-4 px-4 max-w-7xl sm:grid-cols-2 md:grid-cols-3 md:ml-5">
         @foreach ($challenges as $challenge)
+        @auth
             <div class="max-w-3xl px-4 py-2 space-y-4 bg-white rounded-lg shadow dark:bg-slate-800">
                 <h2 class="text-xl text-slate-600 dark:text-slate-300 hover:underline">
-                    <a href="{{ route('challenges.show',  $challenge) }}">
+                    <a href="{{ route('challenges.show', $challenge) }}">
                         {{ $challenge->titulo }}
 
                         @if (isset($challenge->img))
                             <div class="py-2">
                                 <img class="rounded shadow object-cover h-48 w-96"
                                     src="{{ asset('img_challenges/' . $challenge->img) }}" alt="">
+                                    @endif
                             </div>
-                        @endif
                 </h2>
                 </a>
+                @endauth
+
+                @guest
+                    <div class="max-w-3xl px-4 py-2 space-y-4 bg-white rounded-lg shadow dark:bg-slate-800">
+                        <h2 class="text-xl text-slate-600 dark:text-slate-300 hover:underline">
+                            <a href="{{ route('login-guest', $challenge) }}">
+                                {{ $challenge->titulo }}
+
+                                @if (isset($challenge->img))
+                                    <div class="py-2">
+                                        <img class="rounded shadow object-cover h-48 w-96"
+                                            src="{{ asset('img_challenges/' . $challenge->img) }}" alt="">
+                                            @endif
+                                    </div>
+
+                        </h2>
+                        </a>
+                    </div>
+                @endguest
+
                 @auth
                     <div class="flex justify-center">
 
@@ -42,7 +63,7 @@
                     </div>
                 @endauth
                 @guest
-                    <div class="flex justify-center">
+                    {{-- <div class="flex justify-center">
 
                         <a class="rounded text-xs font-semibold uppercase focus:shadow-outline
     mt-2 px-4 py-2 bg-blue-600 hover:bg-red-500 hover:text-gray-900 focus:bg-gray-200
@@ -51,7 +72,7 @@
                             href="{{ route('login-guest') }}">
                             Ver detalles
                         </a>
-                    </div>
+                    </div> --}}
 
                 @endguest
 

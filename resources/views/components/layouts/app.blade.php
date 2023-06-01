@@ -19,6 +19,13 @@
     </div>
     @endif
 
+    @if (session('mensaje'))
+    <div id="mensaje" class="flex justify-center">
+        <div class="w-96 rounded-lg mt-3 text-center max-w-screen-xl px-3 py-2 mx-auto text-white sm:px-6 lg:px-8
+        bg-red-400 dark:bg-emerald-700"> {{session('mensaje')}} </div>
+    </div>
+    @endif
+
     {{ $slot }}
 </body>
 </html>

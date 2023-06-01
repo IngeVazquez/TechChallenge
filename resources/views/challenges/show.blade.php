@@ -22,8 +22,23 @@
                 <img class="mx-auto rounded-lg mb-6" src="{{ asset('img_challenges/' . $challenge->img) }}"
                     alt="">
             </div>
+        @endif
 
+        <form action="{{ route('new.register', $challenge) }}" method="POST">
+            @csrf
             <div class="flex justify-center">
+            <button
+                class="rounded text-xs font-semibold uppercase focus:shadow-outline
+        mt-2 px-4 py-2 bg-blue-600 hover:bg-red-500 hover:text-gray-900 focus:bg-gray-200
+        focus:text-gray-900 focus:outline-none text-white
+        dark:bg-gray-700"
+                type="submit">
+                Aceptar reto
+            </button>
+            <div class="flex justify-center">
+        </form>
+
+            {{-- <div class="flex justify-center">
 
                 <a class="rounded text-xs font-semibold uppercase focus:shadow-outline
                         mt-2 px-4 py-2 bg-blue-600 hover:bg-red-500 hover:text-gray-900 focus:bg-gray-200
@@ -32,8 +47,7 @@
                     href="{{ route('new.register', $challenge) }}">
                     Aceptar reto
                 </a>
-            </div>
-        @endif
+            </div> --}}
 
 
         {{-- <a class="flex justify-center ml-16 hover:bg-gray-200 dark:text-white " href="/challenges/{{$challenge->id+1}}">
